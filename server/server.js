@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/your-app-name', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -31,7 +31,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-// Auth Routes
 app.post('/api/auth/signup', async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -52,49 +51,9 @@ app.post('/api/auth/signup', async (req, res) => {
   }
 });
 
-app.post('/api/auth/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '24h' });
-    res.json({ token, user: { id: user._id, name: user.name, email } });
-  } catch (error) {
-    res.status(500).json({ message: 'Error logging in' });
-  }
-});
-
-// Protected route example
-app.get('/api/auth/verify', authenticateToken, (req, res) => {
-  res.json({ user: req.user });
-});
-
-// Middleware to authenticate JWT
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) {
-    return res.status(401).json({ message: 'Authentication required' });
-  }
-
-  jwt.verify(token, JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(403).json({ message: 'Invalid token' });
-    }
-    req.user = decoded;
-    next();
-  });
-}
+app.get("/",(req,res)=>{
+  res.json({"key":"name"});
+})
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
