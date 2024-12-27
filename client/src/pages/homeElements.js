@@ -1,6 +1,6 @@
 import React from 'react'; 
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Linkedin, Facebook,Twitter, Calendar, ChevronRight, ArrowRight } from 'lucide-react'; 
+// import { MapPin, Phone, Mail, Linkedin, Facebook,Twitter, Calendar, ChevronRight, ArrowRight } from 'lucide-react'; 
 import placeholderImage from './placeholder.jpg';
 
 
@@ -9,7 +9,7 @@ import placeholderImage from './placeholder.jpg';
 
 const HeroSection = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className=" flex flex-col">
       <section className="relative bg-gradient-to-br from-red-600 via-red-500 to-red-700 py-32 overflow-hidden">
         <motion.div
           initial={{ opacity: 0 }}
@@ -143,17 +143,17 @@ const WhatWeDo = () => {
 
 
 const statistics = [
-  { number: '500+', label: 'Successful Placements' },
-  { number: '98%', label: 'Client Satisfaction' },
-  { number: '50+', label: 'Industry Partners' },
-  { number: '10+', label: 'Years Experience' },
+  { number: "500+", label: "Companies Served" },
+  { number: "10K+", label: "Placements Made" },
+  { number: "98%", label: "Client Satisfaction" },
+  { number: "15+", label: "Years Experience" }
 ];
 
 const reasons = [
-  { title: 'Industry Expertise', icon: '🎓' },
-  { title: 'Quick Turnaround', icon: '⚡' },
-  { title: 'Quality Candidates', icon: '🌟' },
-  { title: 'Ongoing Support', icon: '🤝' },
+  { title: "Expert Team", icon: "👨‍💼" },
+  { title: "Fast Placement", icon: "⚡" },
+  { title: "Quality Focus", icon: "🎯" },
+  { title: "Global Network", icon: "🌐" }
 ];
 
 const StatsAndReasons = () => {
@@ -190,7 +190,6 @@ const StatsAndReasons = () => {
           </div>
         </motion.div>
       </section>
-
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <motion.h2
@@ -208,7 +207,7 @@ const StatsAndReasons = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)'
                 }}
@@ -216,7 +215,7 @@ const StatsAndReasons = () => {
               >
                 <motion.div
                   whileHover={{ rotate: 360 }}
-                  transition={{ 
+                  transition={{
                     type: "spring",
                     stiffness: 200,
                     duration: 0.3
@@ -239,7 +238,6 @@ const StatsAndReasons = () => {
     </>
   );
 };
-
 
 {/* Recent Works & Life at Kaarlo with modern design */} 
 
