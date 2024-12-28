@@ -1,7 +1,9 @@
-import React from 'react'; 
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 // import { MapPin, Phone, Mail, Linkedin, Facebook,Twitter, Calendar, ChevronRight, ArrowRight } from 'lucide-react'; 
 import placeholderImage from './placeholder.jpg';
+import { link } from 'framer-motion/client';
+import { useNavigate } from 'react-router-dom';
 
 
 {/* Hero Section with gradient background and modern design */}
@@ -146,7 +148,7 @@ const statistics = [
   { number: "500+", label: "Companies Served" },
   { number: "10K+", label: "Placements Made" },
   { number: "98%", label: "Client Satisfaction" },
-  { number: "15+", label: "Years Experience" }
+  { number: "2+", label: "Years Experience" }
 ];
 
 const reasons = [
@@ -241,107 +243,303 @@ const StatsAndReasons = () => {
 
 {/* Recent Works & Life at Kaarlo with modern design */} 
 
-const successStories = [
+const testimonials = [
   {
-    title: 'Project 1',
-    description: 'Successful placement case study.',
-    tags: ['Technology', 'Senior Role']
+    name: 'Cheran R, Candidate',
+    feedback: `I am lucky to have seen this company. They have set up a company to suit me. So I really liked their interview approach. They conducted the interview as if it were suitable for a fresher. Thanks to Kaarlo.`,
   },
   {
-    title: 'Project 2',
-    description: 'Successful placement case study.',
-    tags: ['Finance', 'Executive']
+    name: 'Priya Mohan, Candidate',
+    feedback: `It's a great place for job placement. I have joined as Digital Marketing Executive in a reputed company. I had a great experience with Kaarlo. Good service 👏`,
   },
   {
-    title: 'Project 3',
-    description: 'Successful placement case study.',
-    tags: ['Healthcare', 'Leadership']
-  }
+    name: 'Hemamalini, Intern',
+    feedback: `Hello, I'm Hemamalini from M.A.M. Business School. I'm pursuing my MBA Final year. I attended an Internship at Kaarlo, I got a new experience. I have learnt so many new things here, like recruiting and screening. I spoke with lots of people, made new friends, and had a great experience. Thanks for the opportunity.`,
+  },
 ];
 
 const lifeAtKaarloImages = [1, 2, 3, 4];
 
 const StoriesAndLife = () => {
   return (
-    <section className="bg-gray-50 py-24">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-16">
-          {/* Recent Success Stories */}
+    <div className="space-y-16 py-12 bg-gradient-to-b from-gray-50 to-gray-200">
+    {/* Testimonials */}
+    <motion.div
+      initial={{ opacity: 0, x: -50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+      <h2 className="text-4xl font-extrabold text-gray-800 mb-12 text-center">
+        What People Say About Us
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {testimonials.map((testimonial, index) => (
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            key={testimonial.name}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: index * 0.1 }}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)',
+            }}
+            className="relative p-8 bg-gradient-to-br from-red-50 to-gray-50 rounded-lg shadow-md transition-all duration-300 border border-gray-200 hover:shadow-xl"
           >
-            <h2 className="text-3xl font-bold mb-8 text-red-600">Recent Success Stories</h2>
-            <div className="space-y-6">
-              {successStories.map((project, index) => (
-                <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100"
-                >
-                  <h3 className="font-semibold text-xl mb-2 text-gray-800">{project.title}</h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
-                  <div className="flex gap-2">
-                    {project.tags.map(tag => (
-                      <span
-                        key={tag}
-                        className="text-sm px-3 py-1 bg-red-50 text-red-600 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
+            <div className="absolute top-0 left-0 w-20 h-20 bg-red-500/10 rounded-full blur-lg -translate-y-1/2 -translate-x-1/2"></div>
+            <p className="text-gray-700 italic mb-6">"{testimonial.feedback}"</p>
+            <div className="flex items-center space-x-4">
+              <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white font-bold">
+                {testimonial.name[0]}
+              </div>
+              <span className="text-gray-800 font-semibold">{testimonial.name}</span>
             </div>
           </motion.div>
-
-          {/* Life at Kaarlo */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl font-bold mb-8 text-red-600">Life at Kaarlo</h2>
-            <div className="grid grid-cols-2 gap-6">
-              {lifeAtKaarloImages.map((img, index) => (
-                <motion.div
-                  key={img}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="aspect-square bg-gradient-to-br from-red-50 to-red-100 rounded-xl overflow-hidden cursor-pointer relative group"
-                >
-                  <img 
-                    src="/api/placeholder/400/400"
-                    alt="Life at Kaarlo"
-                    className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <p className="text-white p-4 text-sm font-medium">
-                      Life at Kaarlo - Image {index + 1}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+        ))}
       </div>
-    </section>
+    </motion.div>
+
+  
+
+      {/* Life at Kaarlo */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Life at Kaarlo</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {lifeAtKaarloImages.map((img, index) => (
+            <motion.div
+              key={img}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              className="aspect-square bg-gradient-to-br from-red-50 to-red-100 rounded-xl overflow-hidden cursor-pointer relative group"
+            >
+              <div className="absolute inset-0 flex items-center justify-center bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-white text-lg font-medium">Life at Kaarlo - Image {index + 1}</span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </div>
   );
 };
+
+
+
+//Recruitment soutions Buttons to zoho
+
+const Section = ({ title, description, buttons, delay, onClickHandlers }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50, rotateX: 45 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      rotateX: 0,
+      transition: {
+        duration: 0.8,
+        delay,
+        ease: "easeOut",
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0 }
+  };
+
+  const buttonContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const buttonVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: { 
+      scale: 1, 
+      opacity: 1,
+      transition: { type: "spring", stiffness: 200, damping: 10 }
+    }
+  };
+
+  const shimmerEffect = {
+    hidden: { backgroundPosition: "200% 0" },
+    visible: { 
+      backgroundPosition: "-200% 0",
+      transition: {
+        repeat: Infinity,
+        duration: 3,
+        ease: "linear"
+      }
+    }
+  };
+
+  return (
+    <motion.div
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+      className={`bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-lg shadow-lg 
+                  hover:shadow-xl transition-all duration-300 relative overflow-hidden
+                  ${isHovered ? 'translate-y-[-5px]' : ''}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Animated background gradient */}
+      <motion.div
+        variants={shimmerEffect}
+        initial="hidden"
+        animate="visible"
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-red-100/10 to-transparent"
+        style={{ backgroundSize: "200% 100%" }}
+      />
+
+      <motion.div className="relative z-10">
+        <motion.h2 
+          variants={contentVariants}
+          className="text-2xl font-bold text-red-600 mb-3"
+          animate={{
+            scale: isHovered ? 1.05 : 1,
+            color: isHovered ? '#DC2626' : '#EF4444',
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {title}
+        </motion.h2>
+
+        <motion.p 
+          variants={contentVariants}
+          className="text-gray-700 mb-4"
+        >
+          {description}
+        </motion.p>
+
+        <motion.div 
+          className="flex flex-wrap gap-3"
+          variants={buttonContainerVariants}
+        >
+          {buttons.map((button, index) => (
+            <motion.button
+              key={index}
+              variants={buttonVariants}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 5px 15px rgba(220, 38, 38, 0.3)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              onClick={onClickHandlers[index]}
+              className={`bg-red-600 text-white px-4 py-2 rounded-md relative
+                        overflow-hidden transition-colors duration-300
+                        hover:bg-red-700 focus:outline-none focus:ring-2 
+                        focus:ring-red-500 focus:ring-opacity-50`}
+            >
+              <motion.span
+                initial={{ y: 0 }}
+                animate={isHovered ? { y: [-1, 1] } : { y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+                className="block"
+              >
+                {button}
+              </motion.span>
+            </motion.button>
+          ))}
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+const RecruitmentSections = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="max-w-6xl mx-auto p-6">
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: {
+            transition: {
+              staggerChildren: 0.2
+            }
+          }
+        }}
+      >
+        <Section
+          title="Recruitment Solutions"
+          description="Thousands of jobs across India. Hundreds of clients across India."
+          buttons={['Job Seekers', 'Employers', 'Vendors']}
+          delay={0.1}
+          onClickHandlers={[
+            () => window.open('https://thirdparty-jobseekers.com', '_blank'),
+            () => window.open('https://thirdparty-employers.com', '_blank'),
+            () => window.open('https://thirdparty-vendors.com', '_blank'),
+          ]}
+        />
+        
+        <Section
+          title="Training Solutions"
+          description="Expert in Corporate Training, Campus Training, HR Training"
+          buttons={['For Companies', 'Institutions', 'Courses']}
+          delay={0.2}
+          onClickHandlers={[
+            () => navigate('/training/companies'),
+            () => navigate('/training/institutions'),
+            () => navigate('/training/courses'),
+          ]}
+        />
+        
+        <Section
+          title="Internship"
+          description="Join as a student and leave as an employee"
+          buttons={['Inquire Now']}
+          delay={0.3}
+          onClickHandlers={[
+            () => navigate('/internship/inquire'),
+          ]}
+        />
+        
+        <Section
+          title="Organizational Development Solutions"
+          description="Engage your employees and increase your profits"
+          buttons={['Inquire Now']}
+          delay={0.4}
+          onClickHandlers={[
+            () => navigate('/od-solutions/inquire'),
+          ]}
+        />
+      </motion.div>
+    </div>
+  );
+};
+
+
+
 
 const components = {
   StoriesAndLife,
   StatsAndReasons,
   WhatWeDo,
   HeroSection,
+  RecruitmentSections,
 };
 
 export default components;
