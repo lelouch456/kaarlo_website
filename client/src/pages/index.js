@@ -7,6 +7,7 @@ const Home = () => {
     <div className="min-h-screen flex flex-col">
         <components.HeroSection/>
         <components.StatsAndReasons/>
+        <components.FeaturesSection/>
         <components.RecruitmentSections/>
         <VideoSlider/>
         <components.WhatWeDo/>

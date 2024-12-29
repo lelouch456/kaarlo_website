@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import placeholderImage from './placeholder.jpg';
 import { link } from 'framer-motion/client';
 import { useNavigate } from 'react-router-dom';
-
-
+import { FileText , ArrowRight, CheckCircle } from 'lucide-react';
+import { Users, Award,Target,Briefcase, Star, Building } from 'lucide-react';
 {/* Hero Section with gradient background and modern design */}
 
 
@@ -65,76 +65,101 @@ const HeroSection = () => {
 
 
 {/* Services Section with cards */}
-
-const services = [
-  {
-    title: 'Permanent Staffing',
-    description: 'Find your perfect long-term team members with our proven recruitment process.',
-    icon: '👥',
-  },
-  {
-    title: 'Contract Hiring',
-    description: 'Flexible staffing solutions for your project-based requirements.',
-    icon: '📋',
-  },
-  {
-    title: 'Executive Search',
-    description: 'Premium recruitment service for senior leadership positions.',
-    icon: '🎯',
-  },
-];
-
 const WhatWeDo = () => {
+  const services = [
+    {
+      title: 'Permanent Staffing',
+      description: 'Find your perfect long-term team members with our proven recruitment process that ensures the right cultural and skill fit.',
+      icon: <Users className="w-8 h-8" />,
+      benefits: ['Comprehensive screening', 'Culture fit assessment', 'Long-term retention']
+    },
+    {
+      title: 'Contract Hiring',
+      description: 'Flexible staffing solutions for your project-based requirements with quick deployment and scalable team structures.',
+      icon: <FileText className="w-8 h-8" />,
+      benefits: ['Rapid deployment', 'Flexible terms', 'Skilled professionals']
+    },
+    {
+      title: 'Executive Search',
+      description: 'Premium recruitment service for senior leadership positions, focusing on industry leaders who can drive your organization forward.',
+      icon: <Target className="w-8 h-8" />,
+      benefits: ['Confidential search', 'Industry expertise', 'Leadership focus']
+    }
+  ];
+
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <h2 className="text-red-600 text-4xl font-bold text-center mb-4">What We Do</h2>
-          <p className="text-gray-600 text-center mb-16 max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent">
+            What We Do
+          </h2>
+          <div className="w-24 h-1 bg-red-600 mx-auto mb-6" />
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Comprehensive staffing solutions tailored to your unique business needs
           </p>
         </motion.div>
+
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              whileHover={{ scale: 1.03 }}
-              className="p-8 bg-white rounded-2xl shadow-lg transition-all duration-300 border border-gray-100 group"
+              className="group relative"
             >
-              <motion.div
-                whileHover={{ rotate: 360 }}
-                transition={{
-                  duration: 0.3,
-                  ease: "easeInOut",
-                  type: "spring",
-                  stiffness: 200
-                }}
-                className="text-5xl mb-6 inline-block"
-              >
-                {service.icon}
-              </motion.div>
-              <h3 className="text-2xl font-semibold mb-4 text-red-600">{service.title}</h3>
-              <p className="text-gray-600 mb-6">{service.description}</p>
-              <a
-                href="#"
-                className="text-red-600 font-medium flex items-center group relative inline-block"
-              >
-                <span className="relative z-10">Learn More</span>
-                <motion.span
-                  className="ml-2 transform transition-transform duration-300 inline-block"
-                  whileHover={{ x: 10 }}
+              {/* Card */}
+              <div className="h-full p-8 bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-red-200 transition-all duration-300">
+                {/* Icon Container */}
+                <motion.div
+                  whileHover={{ rotate: 360 }}
+                  transition={{
+                    duration: 0.3,
+                    ease: "easeInOut",
+                    type: "spring",
+                    stiffness: 200
+                  }}
+                  className="w-16 h-16 rounded-xl bg-red-50 flex items-center justify-center mb-6 text-red-600 group-hover:bg-red-100 transition-colors duration-300"
                 >
-                  →
-                </motion.span>
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 group-hover:w-full transition-all duration-300"></span>
-              </a>
+                  {service.icon}
+                </motion.div>
+
+                {/* Content */}
+                <h3 className="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-red-600 transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  {service.description}
+                </p>
+
+                {/* Benefits */}
+                <ul className="space-y-3 mb-8">
+                  {service.benefits.map((benefit, idx) => (
+                    <li key={idx} className="flex items-center text-gray-600">
+                      <CheckCircle className="w-5 h-5 text-red-500 mr-2" />
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA Button */}
+                <div className="pt-4 border-t border-gray-100">
+                  <motion.a
+                    href="#"
+                    whileHover={{ x: 10 }}
+                    className="inline-flex items-center text-red-600 font-semibold group/link"
+                  >
+                    Learn More
+                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1" />
+                  </motion.a>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -143,101 +168,218 @@ const WhatWeDo = () => {
   );
 };
 
-
 const statistics = [
-  { number: "500+", label: "Companies Served" },
-  { number: "10K+", label: "Placements Made" },
-  { number: "98%", label: "Client Satisfaction" },
-  { number: "2+", label: "Years Experience" }
+  {
+    number: "15k+",
+    label: "Happy Clients",
+    icon: <Users className="w-6 h-6" />
+  },
+  {
+    number: "98%",
+    label: "Success Rate",
+    icon: <Star className="w-6 h-6" />
+  },
+  {
+    number: "2+",
+    label: "Years Experience",
+    icon: <Award className="w-6 h-6" />
+  },
+  {
+    number: "500+",
+    label: "Companies Served",
+    icon: <Building className="w-6 h-6" />
+  }
 ];
-
 const reasons = [
-  { title: "Expert Team", icon: "👨‍💼" },
-  { title: "Fast Placement", icon: "⚡" },
-  { title: "Quality Focus", icon: "🎯" },
-  { title: "Global Network", icon: "🌐" }
-];
+    {
+      icon: <Award />,
+      title: "Excellence Guaranteed",
+      description: "Delivering top-tier staffing solutions with proven results"
+    },
+    {
+      icon: <Users />,
+      title: "Expert Team",
+      description: "Skilled professionals dedicated to your success"
+    },
+    {
+      icon: <Target />,
+      title: "Precise Matching",
+      description: "Strategic talent placement for optimal outcomes"
+    },
+    {
+      icon: <Briefcase />,
+      title: "Industry Leaders",
+      description: "Setting the standard in staffing excellence"
+    }
+  ];
 
 const StatsAndReasons = () => {
   return (
-    <>
-      <section className="py-16 bg-red-600 text-white relative overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="container mx-auto px-4"
-        >
-          <div className="grid md:grid-cols-4 gap-8 text-center">
-            {statistics.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="p-6 relative"
-              >
+    <section className="relative overflow-hidden">
+      {/* Background with gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-600" />
+      
+      {/* Decorative patterns */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" 
+          style={{
+            backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
+            backgroundSize: '30px 30px'
+          }}
+        />
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative container mx-auto px-4 py-20"
+      >
+        <div className="grid md:grid-cols-4 gap-8 text-center">
+          {statistics.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative"
+            >
+              {/* Card Content */}
+              <div className="relative p-8 rounded-xl backdrop-blur-sm border border-red-400/30 hover:border-white/30 transition-all duration-300">
+                {/* Icon */}
                 <motion.div
-                  initial={{ scale: 0.5 }}
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  className="mb-6 mx-auto"
+                >
+                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-white/20 transition-colors duration-300">
+                    {stat.icon}
+                  </div>
+                </motion.div>
+
+                {/* Number */}
+                <motion.div
+                  initial={{ scale: 0.8 }}
                   whileInView={{ scale: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="text-5xl font-bold mb-2"
+                  className="relative"
                 >
-                  {stat.number}
+                  <h3 className="text-5xl font-bold text-white mb-2 tracking-tight">
+                    {stat.number}
+                  </h3>
+                  <div className="w-12 h-1 bg-white/30 mx-auto mb-3" />
+                  <p className="text-red-100 font-medium text-lg">
+                    {stat.label}
+                  </p>
                 </motion.div>
-                <div className="text-red-100 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl font-bold text-center mb-16 text-red-600"
-          >
-            Why Choose Us
-          </motion.h2>
-          <div className="grid md:grid-cols-4 gap-8">
-            {reasons.map((reason, index) => (
-              <motion.div
-                key={reason.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)'
-                }}
-                className="text-center p-8 rounded-xl hover:bg-red-50 transition-colors duration-300 border border-gray-100"
-              >
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 200,
-                    duration: 0.3
-                  }}
-                  className="text-5xl mb-6 inline-block"
-                >
-                  {reason.icon}
-                </motion.div>
-                <h3 className="text-xl font-semibold mb-3 text-gray-800">
-                  {reason.title}
-                </h3>
-                <p className="text-gray-600">
-                  Delivering excellence in staffing solutions.
-                </p>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </section>
-    </>
+      </motion.div>
+    </section>
+  );
+};
+const FeaturesSection = () => {
+  const reasons = [
+    {
+      icon: <Award />,
+      title: "Excellence Guaranteed",
+      description: "Delivering top-tier staffing solutions with proven results"
+    },
+    {
+      icon: <Users />,
+      title: "Expert Team",
+      description: "Skilled professionals dedicated to your success"
+    },
+    {
+      icon: <Target />,
+      title: "Precise Matching",
+      description: "Strategic talent placement for optimal outcomes"
+    },
+    {
+      icon: <Briefcase />,
+      title: "Industry Leaders",
+      description: "Setting the standard in staffing excellence"
+    }
+  ];
+
+  return (
+    <div className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" 
+             style={{
+               backgroundImage: 'radial-gradient(circle at 2px 2px, red 1px, transparent 0)',
+               backgroundSize: '40px 40px'
+             }}
+        />
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-7xl mx-auto px-4 relative z-10"
+      >
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold text-white mb-6">
+            Why Choose Us
+          </h2>
+          <div className="w-24 h-1 bg-red-600 mx-auto mb-6" />
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            Empowering businesses with exceptional staffing solutions that drive growth and success
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-4 gap-8">
+          {reasons.map((reason, index) => (
+            <motion.div
+              key={reason.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{
+                scale: 1.02,
+                transition: { duration: 0.2 }
+              }}
+              className="relative group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-gray-800/20 rounded-xl transform group-hover:scale-105 transition-transform duration-300" />
+              <div className="relative p-8 rounded-xl bg-white/10 backdrop-blur-sm border border-gray-700 hover:border-red-500 transition-colors duration-300">
+                <div className="flex flex-col items-center">
+                  <motion.div
+                    whileHover={{ rotate: 360 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 200,
+                      duration: 0.3
+                    }}
+                    className="mb-6 p-4 rounded-full bg-gradient-to-br from-red-500 to-red-600 text-white shadow-lg"
+                  >
+                    <div className="w-8 h-8">
+                      {reason.icon}
+                    </div>
+                  </motion.div>
+                  <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-red-400 transition-colors duration-300">
+                    {reason.title}
+                  </h3>
+                  <p className="text-gray-400 text-center">
+                    {reason.description}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
@@ -537,6 +679,7 @@ const RecruitmentSections = () => {
 const components = {
   StoriesAndLife,
   StatsAndReasons,
+  FeaturesSection,
   WhatWeDo,
   HeroSection,
   RecruitmentSections,

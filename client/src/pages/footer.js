@@ -10,7 +10,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {['Home', 'About', 'Services', 'Contact'].map((link) => (
                 <li key={link}>
-                  <a href={`#${link.toLowerCase()}`} 
+                  <a href={`/${link.toLowerCase()}`} 
                      className="hover:text-blue-400 transition-colors duration-200">
                     {link}
                   </a>
@@ -54,15 +54,15 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-blue-400" />
-                <span>+1 (555) 123-4567</span>
+                <span>+917358999874</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-400" />
-                <span>contact@kaarlo.com</span>
+                <span>info@kaarlo.com</span>
               </li>
               <li className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-blue-400" />
-                <span>123 Business Ave, City</span>
+                <span>Trichy 620021, Tamil Nadu</span>
               </li>
             </ul>
           </div>
